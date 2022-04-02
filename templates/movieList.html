@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Netflix
+{% endblock title %}
+
+{% block others %}
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+
+{% endblock others %}
+{% block content %}
+
+
+    {% include 'partials/navbar.html' %}
+    <main class='bg-primary_black min-h-screen w-full'>
+        <section class="h-screen relative bg-no-repeat pb-8 pl-6 flex  items-end bg-cover"
+                 style="background-image: url('https://image.tmdb.org/t/p/w500{{ movie.poster_path }}');">
+            <div>
+                <h2 class="text-6xl font-semibold text-white my-4">
+                    {{ movie.title }}
+                </h2>
+                <p class=" w-11/12 md:w-5/12 font-medium text-white my-4">
+                    {{ movie.overview }}
+                </p>
+                <div class="flex my-4">
+                    <!--https://www.themoviedb.org/movie/496243/watch-->
+                    <a href='https://www.themoviedb.org/movie/{{ movie.id }}/watch'>
+
+                        <button class="flex items-center bg-white py-2 px-5 rounded-md" style='color:black;'>
+                            <ion-icon name="play" class="text-2xl"></ion-icon>
+                            <span class="ml-3 font-medium">
+                                Play
+                            </span>
+                        </button>
+                    </a>
+
+
+                </div>
+            </div>
+        </section>
+        <!--popular_movies-->
+        <section class='bg-primary_black  min-h-screen flex justify-center py-10'>
+            <div class="p-8 w-10/12 relative">
+                <h2 class="text-gray-200 text-2xl font-medium">
+                    Popular
+                </h2>
+                <div class="flex   items-center min-w-full  movie_lis">
+                    {% for movie in popular_movies %}
+
+                        <a href="{% url 'myApp1:movieDetail' movie_id=movie.id %}">
+
+                            <div class=" h-40 m-4  bg-blue-500 overflow-hidden flex-shrink-0 rounded-md cursor-pointer w-40">
+                                <img src="{{ movie.poster_path }}" class="w-full h-full " alt="{{ movie.name }}">
+                            </div>
+                            <div class=" h-40 m-4  overflow-hidden flex-shrink-0 rounded-md cursor-pointer w-40">
+                                <h5>{{ movie.name }} </h5>
+                            </div>
+
+
+                        </a>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+        </section>
+        <!--upcoming_movies-->
+        <section class='bg-primary_black  min-h-screen flex justify-center py-10'>
+            <div class="p-8 w-10/12 relative">
+                <h2 class="text-gray-200 text-2xl font-medium">
+                    Upcoming
+                </h2>
+                <div class="flex   items-center min-w-full  movie_lis">
+                    {% for movie in upcoming_movies %}
+
+                        <a href="{% url 'myApp1:movieDetail' movie_id=movie.id %}">
+
+                            <div class=" h-40 m-4  bg-blue-500 overflow-hidden flex-shrink-0 rounded-md cursor-pointer w-40">
+                                <img src="{{ movie.poster_path }}" class="w-full h-full " alt="{{ movie.name }}">
+                            </div>
+                            <div class=" h-40 m-4  overflow-hidden flex-shrink-0 rounded-md cursor-pointer w-40">
+                                <h5>{{ movie.name }} </h5>
+                            </div>
+
+
+                        </a>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+        </section>
+        <!--top_rated_movies-->
+        <section class='bg-primary_black  min-h-screen flex justify-center py-10'>
+            <div class="p-8 w-10/12 relative">
+                <h2 class="text-gray-200 text-2xl font-medium">
+                    Top rated
+                </h2>
+                <div class="flex   items-center min-w-full  movie_lis">
+                    {% for movie in top_rated_movies %}
+
+                        <a href="{% url 'myApp1:movieDetail' movie_id=movie.id %}">
+
+                            <div class=" h-40 m-4  bg-blue-500 overflow-hidden flex-shrink-0 rounded-md cursor-pointer w-40">
+                                <img src="{{ movie.poster_path }}" class="w-full h-full " alt="{{ movie.name }}">
+                            </div>
+                            <div class=" h-40 m-4  overflow-hidden flex-shrink-0 rounded-md cursor-pointer w-40">
+                                <h5>{{ movie.name }} </h5>
+                            </div>
+
+
+                        </a>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+{% endblock content %}
