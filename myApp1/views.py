@@ -53,8 +53,8 @@ def showMovie(request):
 
 
 # will return list of limited 5 random elements from the _list
-def get_random_elements(_list, limit=5):
-    return random.sample(_list, limit)
+def get_random_elements(_list, limit=100):
+    return random.sample(_list, min(limit, len(_list)))
 
 
 def movieList(request):

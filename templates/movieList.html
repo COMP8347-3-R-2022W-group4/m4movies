@@ -39,12 +39,10 @@
             </div>
         </section>
         <!--popular_movies-->
-        <section class='bg-primary_black  min-h-screen flex justify-center py-10'>
-            <div class="p-8 w-10/12 relative">
-                <h2 class="text-gray-200 text-2xl font-medium">
-                    Popular
-                </h2>
-                <div class="flex   items-center min-w-full  movie_lis">
+        <div class="text-gray-200 text-2xl p-8">Popular</div>
+        <section class='bg-primary_black px-5 flex-shrink-0 justify-center' style="overflow-x: scroll">
+            <div class="px-5 w-10/12 relative">
+                <div class="flex items-center min-w-full">
                     {% for movie in popular_movies %}
 
                         <a href="{% url 'myApp1:movieDetail' movie_id=movie.id %}">
@@ -65,11 +63,9 @@
             </div>
         </section>
         <!--upcoming_movies-->
-        <section class='bg-primary_black  min-h-screen flex justify-center py-10'>
-            <div class="p-8 w-10/12 relative">
-                <h2 class="text-gray-200 text-2xl font-medium">
-                    Upcoming
-                </h2>
+        <div class="text-gray-200 text-2xl p-8">Upcoming</div>
+        <section class='bg-primary_black px-5 flex-shrink-0 justify-center' style="overflow-x: scroll">
+            <div class="px-5 w-10/12 relative">
                 <div class="flex   items-center min-w-full  movie_lis">
                     {% for movie in upcoming_movies %}
 
@@ -91,12 +87,10 @@
             </div>
         </section>
         <!--top_rated_movies-->
-        <section class='bg-primary_black  min-h-screen flex justify-center py-10'>
-            <div class="p-8 w-10/12 relative">
-                <h2 class="text-gray-200 text-2xl font-medium">
-                    Top rated
-                </h2>
-                <div class="flex   items-center min-w-full  movie_lis">
+        <div class="text-gray-200 text-2xl p-8">Top rated</div>
+        <section class='bg-primary_black px-5 flex-shrink-0 justify-center' style="overflow-x: scroll">
+            <div class="px-5 w-10/12 relative">
+                <div class="flex   items-center min-w-full">
                     {% for movie in top_rated_movies %}
 
                         <a href="{% url 'myApp1:movieDetail' movie_id=movie.id %}">
@@ -105,7 +99,7 @@
                                 <img src="{{ movie.poster_path }}" class="w-full h-full " alt="{{ movie.name }}">
                             </div>
                             <div class=" h-40 m-4  overflow-hidden flex-shrink-0 rounded-md cursor-pointer w-40">
-                                <h5>{{ movie.name }} </h5>
+                                {{ movie.name }}
                             </div>
 
 
