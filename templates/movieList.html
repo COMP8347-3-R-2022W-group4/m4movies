@@ -38,6 +38,30 @@
                 </div>
             </div>
         </section>
+        <!--new UI cards-->
+        <div class="cards">
+            {% for movie in top_rated_movies %}
+                <a href="{% url 'myApp1:movieDetail' movie_id=movie.id %}" class="card">
+                    <img src="{{ image_prefix }}{{ movie.poster_path }}"
+                         class="w-full h-full border-round"
+                         alt="{{ movie.name }}">
+                    <div class="card__overlay">
+                        <div class="card__header">
+                            {#                            <svg class="card__arc bg-blue-500" xmlns="http://www.w3.org/2000/svg">#}
+                            {#                                <path/>#}
+                            {#                            </svg>#}
+                            <img class="card__thumb" src="{{ image_prefix }}{{ movie.poster_path }}"
+                                 alt=""/>
+                            <div class="card__header-text">
+                                <h3 class="card__title">{{ movie.title }}</h3>
+                                <span class="card__status">{{ movie.vote_average }}</span>
+                            </div>
+                        </div>
+                        <p class="card__description">{{ movie.overview | slice:50 }}...</p>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
         <!--popular_movies-->
         <div class="text-gray-200 text-2xl p-8">Popular</div>
         <section class='bg-primary_black px-5 flex-shrink-0 justify-center' style="overflow-x: scroll">
