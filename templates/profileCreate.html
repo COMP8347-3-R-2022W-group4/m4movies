@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-    Netflix - Profile
+    Account Settings
 {% endblock title %}
 
 {% block content %}
@@ -19,7 +19,7 @@
                 {% else %}
 
                     <h1 class="text-4xl text-center text-gray-100 font-medium">
-                        Create A Profile
+                        Account Settings
                     </h1>
                     {% csrf_token %}
 
@@ -33,14 +33,10 @@
                     </div>
                     <div class="my-4">
                         <Label class='text-lg text-gray-200 font-medium mb-3'>
-                            Maturity Level
+                            Email ID
                         </Label>
-                        <select class="p-2 bg-gray-500 rounded-sm text-gray-200 outline-none block w-full"
-                                name="age_limit" id="id_age_limit">
-                            <option value="All">All</option>
-                            <option value="Kids">Kids</option>
-
-                        </select>
+                        <input required class="p-2 bg-gray-500 rounded-sm text-gray-200 outline-none block w-full"
+                               type="text" name="email" id="id_email" placeholder="Email ID">
                     </div>
                     <div class="flex justify-center items-center">
                         <button class="px-4 py-2 rounded-md outline-none bg-primary_red text-gray-100">Create Profile
