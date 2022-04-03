@@ -35,7 +35,7 @@ Netflix - Profile
         {% if request.user.profiles.all|length < 5 %}
       
             <div class="flex justify-center items-center">
-                <a href="{% url 'myApp1:profileCreate' %}">
+                <a href="{% url 'myApp1:account_settings' %}">
 {#                    'core:profile_create'#}
                     <button class="px-4 py-2 rounded-md outline-none bg-gray-400 text-gray-100">
                         Add A New Profile

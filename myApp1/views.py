@@ -86,6 +86,7 @@ def about(request):
 def movieDetail(request, movie_id):
     movie_json = fetch_movie_detail(movie_id)
     context = {
+        'voting_5_star_scale': movie_json.get('vote_average', 0) // 2,
         'movie': movie_json,
         'providers': fetch_movie_providers(movie_id)
     }
