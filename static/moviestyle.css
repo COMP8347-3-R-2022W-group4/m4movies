@@ -619,6 +619,12 @@ video {
     border-bottom-right-radius: 0.125rem;
 }
 
+.invert-color {
+    color: #f00;
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+}
+
 .rounded-bl-sm {
     border-bottom-left-radius: 0.125rem;
 }
@@ -1034,7 +1040,7 @@ body {
 .mm-review-count {
     font-weight: 400;
     margin-bottom: 2px;
-    font-size: 24px ;
+    font-size: 24px;
 }
 
 @-webkit-keyframes spin {
