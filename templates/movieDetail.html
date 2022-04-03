@@ -14,11 +14,13 @@
         <section class="h-screen relative bg-no-repeat pb-8 pl-6 flex  items-end bg-cover"
                  style="background-image: url('https://image.tmdb.org/t/p/w500{{ movie.poster_path }}');">
             <div>
-                <h2 class="text-6xl font-semibold text-white my-4 bg-primary_black">
+                <h2 class="text-6xl p-2 font-semibold text-white bg-primary_black rounded-lg"
+                    style="text-shadow: 2px 2px 0px #FF0000;">
                     {{ movie.title }}
                 </h2>
-                <p class=" w-11/12 md:w-5/12 font-medium text-white my-4">
-                    {{ movie.overview |slice:":50" }}...
+                <p class="text-sm px-1 w-11/12 md:w-5/12 font-medium text-white"
+                   style="text-shadow: 2px 2px 0px #FF0000;">
+                    {{ movie.tagline | slice:100 }}
                 </p>
                 <div class="flex my-4">
                     <!--https://www.themoviedb.org/movie/496243/watch-->
@@ -76,6 +78,7 @@
                     </p>
                 </div>
                 <p>Released: {{ movie.release_date }}</p>
+                <p>Duration: {{ movie.runtime }} minutes</p>
             </div>
         </section>
 
