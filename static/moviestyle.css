@@ -1006,6 +1006,37 @@ video {
     z-index: 50;
 }
 
+body {
+    background-color: #eef3f4
+}
+
+.mm-height-10 {
+    height: 10vh;
+}
+
+.mm-center-des {
+    margin-top: 1.5rem;
+}
+
+.mm-ratings {
+    margin-right: 10px;
+}
+
+.mm-ratings i {
+    color: #cecece;
+    font-size: 32px;
+}
+
+.mm-ratings .mm-rating-color {
+    color: #fbc634;
+}
+
+.mm-review-count {
+    font-weight: 400;
+    margin-bottom: 2px;
+    font-size: 24px ;
+}
+
 @-webkit-keyframes spin {
     to {
         transform: rotate(360deg);
