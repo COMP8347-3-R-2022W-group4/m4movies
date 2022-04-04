@@ -41,7 +41,6 @@ def loginPage(request):
                 return redirect('myApp1:loginPage')
             else:
                 messages.error(request, 'Username or password is incorrect')
-                # return render(request, 'loginapp/login.html', context)
         context = {}
         return render(request, 'login.html', context)
     # return HttpResponse('This is the about page')
@@ -74,8 +73,6 @@ def signup(request):
 
         context = {'registerForm': registerForm}
         return render(request, 'signup.html', context)
-    # return HttpResponse('This is the about page')
-    # return render(request, 'signup.html')
 
 
 def about(request):
@@ -114,16 +111,6 @@ def movieList(request):
         'upcoming_movies': get_random_elements(upcoming_movies)
     }
     return render(request, 'movieList.html', context)
-
-
-def profileList(request):
-    # return HttpResponse('This is the about page')
-    return render(request, 'profileList.html')
-
-
-def profileCreate(request):
-    # return HttpResponse('This is the about page')
-    return render(request, 'profileCreate.html')
 
 
 def detail(request, type_no):

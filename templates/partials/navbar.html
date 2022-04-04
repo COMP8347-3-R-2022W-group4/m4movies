@@ -12,13 +12,6 @@
             <div class="md:w-2/12">
                 <div class="row">
                     <div class="col">
-                        <a href="{% url 'myApp1:account_settings' %}">
-                            <img src="{% static 'profile1.png' %}" alt="profileCreate"
-                                 class="w-5/12  invert-color px-1 py-1">
-                            {#style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);">#}
-                        </a>
-                    </div>
-                    <div class="col">
                         <form action="{% url 'myApp1:logoutUser' %}" method="post">
                             {% csrf_token %}
 
@@ -26,8 +19,16 @@
                                 Logout
                             </button>
                         </form>
-
                     </div>
+                    <div class="col">
+                        <a href="{% url 'myApp1:account_settings' %}">
+                            <img src="{% static 'profile1.png' %}" alt="profileCreate"
+                                 class="w-5/12 bg-primary_red  px-1 py-1">
+                            {{ request.user.username }}
+                            {#style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);">#}
+                        </a>
+                    </div>
+
                 </div>
             </div>
 
@@ -36,7 +37,7 @@
                 <a href="{% url 'myApp1:loginPage' %}">
 
                     <button class='bg-primary_red py-1 px-3 text-white md:text-lg rounded-md'>
-                        Sign In
+                        Log In
                     </button>
                 </a>
             </div>

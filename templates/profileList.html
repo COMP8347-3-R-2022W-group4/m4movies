@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-Netflix - Profile
+    Profile
 {% endblock title %}
 
 {% block content %}
@@ -17,26 +17,26 @@ Netflix - Profile
 
         <div class="flex flex-wrap justify-center items-center w-10/12  md:w-6/12">
 
-        {% for profile in profiles %}
-            <a href="{% url 'core:watch' profile_id=profile.uuid %}">
-            
-                <div class="w-32 h-32 m-4  bg-blue-500 flex justify-center items-center flex-col rounded-md cursor-pointer">
-                    <p class='text-6xl'>
-                        {{profile.name | slice:":1"}}
-                    </p>
-                    <p class='text-lg'>
-                        {{profile.name}}
-                    </p>
-                </div>
-            </a>
-        {% endfor %}
+            {% for profile in profiles %}
+                <a href="{% url 'core:watch' profile_id=profile.uuid %}">
+
+                    <div class="w-32 h-32 m-4  bg-blue-500 flex justify-center items-center flex-col rounded-md cursor-pointer">
+                        <p class='text-6xl'>
+                            {{ profile.name | slice:":1" }}
+                        </p>
+                        <p class='text-lg'>
+                            {{ profile.name }}
+                        </p>
+                    </div>
+                </a>
+            {% endfor %}
 
         </div>
         {% if request.user.profiles.all|length < 5 %}
-      
+
             <div class="flex justify-center items-center">
                 <a href="{% url 'myApp1:account_settings' %}">
-{#                    'core:profile_create'#}
+                    {#                    'core:profile_create'#}
                     <button class="px-4 py-2 rounded-md outline-none bg-gray-400 text-gray-100">
                         Add A New Profile
                     </button>

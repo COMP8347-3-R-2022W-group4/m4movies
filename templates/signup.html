@@ -5,23 +5,22 @@
 {% endblock title %}
 
 {% block other %}
-    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 {% endblock other %}
 
 {% block content %}
 
     {% include 'partials/navbar.html' %}
     <header class="min-h-screen w-full bg-black bg-opacity-75 showcase relative border-gray-600 border-b-8 flex justify-center py-20 bg-no-repeat"
-            style="background-image: url('{% static 'background_netflix.jpg' %}');">
+            style="background-image: url('{% static 'background_main.jpg' %}');">
         <div class="z-10 min-h-full py-32 md:py-0 text-gray-100 w-6/12  flex items-center flex-col">
-            <form method='POST' class="bg-black bg-opacity-70 min-h-full py-8 px-4 w-8/12 rounded-md" action="">
+            <form method='POST' class="bg-black bg-opacity-70  py-8 px-4 w-8/12 rounded-md" action="">
                 <h1 class="text-4xl font-semibold text-center ">
                     Sign Up
                 </h1>
                 {% csrf_token %}
                 {% if form.errors %}
 
-                    <div class=" text-center my-4 text-primary_red">
+                    <div class="items-center text-center my-4 text-primary_red">
                         {{ form.errors.email }}
                         {{ form.errors.password1 }}
                         {{ form.errors.password2 }}
@@ -29,36 +28,53 @@
                     </div>
                 {% endif %}
 
-                <div>
+                <div class="my-3">
                     <Label class='text-lg font-medium mb-3'>
-
                         Username
                     </Label>
-                    {{ registerForm.username }}
-                    {#                    <input class="p-2 bg-gray-200 rounded-sm text-gray-900 outline-none block w-full" type="email" name="email" id="id_email" placeholder="Your Email">#}
+                    <input class="p-2 bg-gray-200 rounded-sm text-gray-900 outline-none block w-full"
+                           type="text" aria-label="username" name="username" id="id_login" placeholder="Your Username">
+                    {#                    <div class="text-black p-2 bg-gray-200 rounded-sm text-gray-900 outline-none block w-full">#}
+                    {#                        {{ registerForm.username }}#}
+                    {#                    </div>#}
                 </div>
 
-                <div>
+                <div class="my-3">
                     <Label class='text-lg font-medium mb-3'>
-
                         Email
                     </Label>
-                    {{ registerForm.email }}
+                    {#                    <div class="p-2 bg-gray-200 rounded-sm text-gray-900 outline-none block w-full">#}
+                    {#                        {{ registerForm.email }}#}
+                    {#                    </div>#}
+                    {#                    <label for="id_email"></label>#}
+                    <input class="p-2 bg-gray-200 rounded-sm text-gray-900 outline-none block w-full"
+                           type="email" aria-label="email"
+                           name="email" id="id_email" placeholder="Your Email">
+
                     {#                    <input class="p-2 bg-gray-200 rounded-sm text-gray-900 outline-none block w-full" type="email" name="email" id="id_email" placeholder="Your Email">#}
                 </div>
                 <div class='my-3'>
                     <Label class='text-lg font-medium mb-3'>
                         Password
                     </Label>
-                    {{ registerForm.password1 }}
+                    <input aria-label="Password"
+                           class="p-2 bg-gray-200 rounded-sm text-gray-900 outline-none block w-full"
+                           type="password" name="password1" id="id_password1" placeholder="Password">
+                    {#                    <i class="text-black p-2 bg-gray-200 rounded-sm text-gray-900 outline-none block w-full">#}
+                    {#                        {{ registerForm.password1 }}#}
+                    {#                    </i>#}
                     {#                    <input class="p-2 bg-gray-200 rounded-sm text-gray-900 outline-none block w-full" type="password" name="password1" id="id_password1" placeholder="Password">#}
                 </div>
                 <div class='my-3'>
                     <Label class='text-lg font-medium mb-3'>
                         Confirm Password
                     </Label>
-                    {{ registerForm.password2 }}
-                    {#                    <input class="p-2 bg-gray-200 rounded-sm text-gray-900 outline-none block w-full" type="password" name="password2" id="id_password2" placeholder="Password">#}
+                    {#                    <div class="text-black">#}
+                    {#                        {{ registerForm.password2 }}#}
+                    {#                    </div>#}
+                    <input aria-label="Password"
+                           class="p-2 bg-gray-200 rounded-sm text-gray-900 outline-none block w-full" type="password"
+                           name="password2" id="id_password2" placeholder="Password">
                 </div>
                 {% if redirect_field_value %}
                     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
