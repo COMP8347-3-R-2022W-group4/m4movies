@@ -29,6 +29,7 @@ def index(request):
 
 
 def loginPage(request):
+    has_errors = False
     if request.user.is_authenticated:
         return redirect('myApp1:index')
     else:
@@ -36,13 +37,13 @@ def loginPage(request):
             username = request.POST.get('username')
             password = request.POST.get('password')
             user = authenticate(request, username=username, password=password)
-            print(user)
             if user is not None:
                 login(request, user)
                 return redirect('myApp1:loginPage')
             else:
+                has_errors = True
                 messages.error(request, 'Username or password is incorrect')
-        context = {}
+        context = {'has_errors': has_errors}
         return render(request, 'login.html', context)
     # return HttpResponse('This is the about page')
     # return render(request, 'login.html')

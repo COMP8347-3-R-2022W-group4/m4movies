@@ -22,13 +22,14 @@
                 </h1>
                 {% csrf_token %}
 
-                {% if form.errors %}
+                {% if has_errors or form.errors %}
 
                     <div class=" text-center my-4 text-primary_red">
 
 
                         <p class="text-primary_red ">
-
+                            The form has some errors, try again with valid data.
+                            Username or password is invalid.
                             {{ form.non_field_errors }}
                         </p>
 
