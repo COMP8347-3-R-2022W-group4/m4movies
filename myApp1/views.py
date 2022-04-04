@@ -115,10 +115,11 @@ def get_random_elements(_list, limit=100):
 
 
 def movieList(request):
-    top_rated_movies = [convert_movieJSONToClass(movie) for movie in fetch_movies(request)]
-    popular_movies = [convert_movieJSONToClass(movie) for movie in fetch_movies(request, 'popular')]
-    upcoming_movies = [convert_movieJSONToClass(movie) for movie in fetch_movies(request, 'upcoming')]
+    top_rated_movies = fetch_movies(request)
+    popular_movies = fetch_movies(request, 'popular')
+    upcoming_movies = fetch_movies(request, 'upcoming')
     context = {
+        'image_prefix': 'https://image.tmdb.org/t/p/w500',
         'movie': get_random_elements(top_rated_movies, 1)[0],
         'top_rated_movies': get_random_elements(top_rated_movies),
         'popular_movies': get_random_elements(popular_movies),
@@ -145,8 +146,7 @@ def fetch_movies(request, endpoint_type='top_rated') -> [str]:
     top_movies = list()
     dummy_movie = {
         'id': '550',
-        'name': 'Fight Club',
-        'url': build_uri(request, '/movies/550'),
+        'title': 'Fight Club',
         'poster_path': '/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg'}
     connection = Connect("api.themoviedb.org")
     json_data = dict()
@@ -158,13 +158,7 @@ def fetch_movies(request, endpoint_type='top_rated') -> [str]:
         data = res.read()
         json_data = json.loads(data.decode("utf-8"))
         for movie in json_data['results']:
-            movie_url = build_uri(request, '/movies/' + str(movie['id']))
-            movie_json = {
-                'id': movie['id'],
-                'name': movie['title'],
-                'url': movie_url,
-                'poster_path': movie['poster_path']}
-            top_movies.append(movie_json)
+            top_movies.append(movie)
         print('Movies fetched from API:', len(top_movies))
     except TypeError as error:
         json_data['error'] = error
@@ -173,7 +167,6 @@ def fetch_movies(request, endpoint_type='top_rated') -> [str]:
         json_data['overview'] = 'Try other movies from below URL'
         json_data['vote_average'] = 0.0
         json_data['vote_count'] = 0
-    top_movies.append(dummy_movie)
     return top_movies
 
 
