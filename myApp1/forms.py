@@ -15,7 +15,7 @@ class CreateUserForm(UserCreationForm):
 class CustomerForm(ModelForm):
     class Meta:
         model = Customer
-        fields = '__all__'
+        fields = ['name', 'phone', 'email', 'profile_pic']
         exclude = ['user']
 
     def __init__(self, *args, **kwargs):

@@ -24,17 +24,38 @@
                 </p>
                 <div class="flex my-4">
                     <!--https://www.themoviedb.org/movie/496243/watch-->
-                    <a href='https://www.themoviedb.org/movie/{{ movie.id }}/watch'>
+                    {% if movie_added %}
+                        <div class="p-2">
+                            <div disabled class="flex items-center bg-gray-400 py-2 px-5 rounded-md"
+                                 style='color:black;'>
+                                <ion-icon name="checkmark-circle-outline" class="text-2xl"></ion-icon>
+                                <span class="ml-3 font-medium">
+                                Added
+                                </span>
+                            </div>
+                        </div>
+                    {% else %}
+                        <a href="{% url 'myApp1:orderMovie' movie_id=movie.id %}"
+                           class="p-2">
+                            <button class="flex items-center bg-white py-2 px-5 rounded-md"
+                                    style='color:black;'>
+                                <ion-icon name="add-circle-outline" class="text-2xl"></ion-icon>
+                                <span class="ml-3 font-medium">
+                                Add
+                            </span>
+                            </button>
+                        </a>
+                    {% endif %}
+                    <a href='https://www.themoviedb.org/movie/{{ movie.id }}/watch'
+                       class="p-2">
 
                         <button class="flex items-center bg-white py-2 px-5 rounded-md" style='color:black;'>
-                            <ion-icon name="play" class="text-2xl"></ion-icon>
+                            <ion-icon name="eye-outline" class="text-2xl"></ion-icon>
                             <span class="ml-3 font-medium">
-                                Play
+                                Watch
                             </span>
                         </button>
                     </a>
-
-
                 </div>
             </div>
         </section>

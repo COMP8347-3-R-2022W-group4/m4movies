@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Type, Item, Customer
+from .models import Customer
 from http.client import HTTPSConnection as Connect
 from django.contrib import messages
 import json
@@ -77,9 +77,25 @@ def about(request):
     return render(request, 'myApp1/about.html')
 
 
+def check_if_movie_added_for_user(request, movie_id):
+    if not request.user:
+        return False
+    if not request.user.is_authenticated:
+        return False
+    if not request.user.customer:
+        return False
+    customer_settings = request.user.customer.settings
+    if not customer_settings:
+        return False
+    ordered = customer_settings['movies_ordered']
+    return movie_id in ordered
+
+
 def movieDetail(request, movie_id):
     movie_json = fetch_movie_detail(movie_id)
+    movie_added = check_if_movie_added_for_user(request, movie_id)
     context = {
+        'movie_added': movie_added,
         'voting_5_star_scale': movie_json.get('vote_average', 0) // 2,
         'movie': movie_json,
         'providers': fetch_movie_providers(movie_id)
@@ -108,19 +124,6 @@ def movieList(request):
         'upcoming_movies': get_random_elements(upcoming_movies)
     }
     return render(request, 'movieList.html', context)
-
-
-def detail(request, type_no):
-    type_with_id = get_object_or_404(Type, pk=type_no)
-    # type_with_id = Type.objects.get(id=type_no)
-    items_with_type = Item.objects.filter(type=type_with_id)
-    response = HttpResponse()
-    heading1 = '<p>' + 'Different Items with type: ' + str(type_with_id) + '</p>'
-    response.write(heading1)
-    for item in items_with_type:
-        para = '<p>' + str(item.price) + ': ' + str(item) + '</p>'
-        response.write(para)
-    return response
 
 
 def build_uri(request, uri_endpoint):
@@ -342,8 +345,6 @@ class MovieDetails:
 @login_required(login_url='myApp1:loginPage')
 # @allowed_users(allowed_roles=['customer'])
 def accountSettings(request):
-    # if not request.user.is_authenticated:
-    #     return redirect('myApp1:loginPage')
     customer = request.user.customer
     form = CustomerForm(instance=customer)
 
@@ -354,3 +355,18 @@ def accountSettings(request):
 
     context = {'form': form}
     return render(request, 'user_profile.html', context)
+
+
+@login_required(login_url='myApp1:loginPage')
+def orderMovie(request, movie_id):
+    movies_key = 'movies_ordered'
+    customer = request.user.customer
+    if not customer.settings:
+        customer.settings = dict()
+    existing_settings = customer.settings
+    unique = existing_settings.get(movies_key, list())
+    unique.append(movie_id)
+    existing_settings[movies_key] = list(set(unique))
+    customer.save()
+    print('customer {} showed interest in movie {}'.format(customer, movie_id))
+    return movieDetail(request, movie_id)
