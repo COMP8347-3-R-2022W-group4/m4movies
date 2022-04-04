@@ -1359,11 +1359,20 @@ body {
     2px 1px 1px #000;
 }
 
+.text_outlined_small {
+    color: white;
+    text-decoration: red;
+    text-shadow: -1px -1px 20px #000,
+    2px -1px 10px #000,
+    -1px 1px 10px red,
+    2px 1px 20px #000;
+}
+
 .text_outlined {
     color: white;
     text-decoration: red;
     text-shadow: -1px -1px 1px #000,
-    2px -1px 1px #000,
+    4px -1px 1px #000,
     -1px 1px 1px red,
-    2px 1px 1px #000;
+    4px 1px 1px #000;
 }
