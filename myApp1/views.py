@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Type, Item
+from .models import Type, Item, Customer
 from http.client import HTTPSConnection as Connect
 from django.contrib import messages
 import json
@@ -60,16 +60,13 @@ def signup(request):
         if request.method == 'POST':
             registerForm = CreateUserForm(request.POST)
             if registerForm.is_valid():
-                user = registerForm.cleaned_data.get('email')
-                print(user)
-                print(registerForm)
-                registerForm.username = user
-                registerForm.save()
-                messages.success(request, 'Hello ' + user + ', your account has been created successfully! 🚀')
+                phone = registerForm.cleaned_data.get('phone')
+                username = registerForm.cleaned_data.get('username')
+                email = registerForm.cleaned_data.get('email')
+                user_saved = registerForm.save()
+                messages.success(request, 'Hello ' + email + ', your account has been created successfully! 🚀')
+                Customer(user=user_saved, email=email, phone=phone, name=username).save()
                 return redirect('myApp1:loginPage')
-            else:
-                print("failed")
-                print(registerForm.cleaned_data.get('password2'))
 
         context = {'registerForm': registerForm}
         return render(request, 'signup.html', context)
