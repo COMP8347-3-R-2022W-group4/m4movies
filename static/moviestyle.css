@@ -630,7 +630,7 @@ video {
 }
 
 .border-b-8 {
-    border-bottom-width: 8px;
+    /*border-bottom-width: 8px;*/
 }
 
 .cursor-pointer {
