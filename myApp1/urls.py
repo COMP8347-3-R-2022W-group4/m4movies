@@ -14,6 +14,7 @@ urlpatterns = [
                   path('movieDetail/<str:movie_id>', views.movieDetail, name='movieDetail'),
                   path('orderMovie/<str:movie_id>', views.orderMovie, name='orderMovie'),
                   path('movieList/', views.movieList, name='movieList'),
+                  path('fetchOrderedMovies/', views.fetchOrderedMovies, name='fetchOrderedMovies'),
                   path('movies/', views.movies, name='movies'),
                   path('movies/<str:movie_id>', views.movie_detail, name='movie_detail'),
                   path('movies/<str:movie_id>/similar', views.similar_movies, name='similar_movies'),

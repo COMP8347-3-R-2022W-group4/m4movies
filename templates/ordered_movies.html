@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Ordered Movies
+{% endblock title %}
+
+{% block others %}
+{% endblock others %}
+
+{% block content %}
+
+
+    {% include 'partials/navbar.html' %}
+    <main class='bg-primary_black min-h-screen w-full'>
+        <div class="py-32">
+        </div>
+        <!--ordered_movies-->
+        <div class="text-gray-200 text-6xl p-8">Ordered movies</div>
+        <section class='bg-primary_black px-5 flex-shrink-0 justify-center' style="overflow-x: scroll">
+            <div class="px-5 w-10/12 relative">
+                <div class="flex items-center min-w-full">
+                    {% for movie in ordered_movies %}
+
+                        <a href="{% url 'myApp1:movieDetail' movie_id=movie.id %}">
+
+                            <div class=" h-40 m-4  bg-blue-500 overflow-hidden flex-shrink-0 rounded-md cursor-pointer w-40">
+                                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="w-full h-full "
+                                     alt="{{ movie.title }}">
+                            </div>
+                            <div class="m-4  overflow-hidden flex-shrink-0 rounded-md cursor-pointer w-40">
+                                <h5>{{ movie.title }} </h5>
+                            </div>
+                        </a>
+
+
+                    {% endfor %}
+
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+{% endblock content %}

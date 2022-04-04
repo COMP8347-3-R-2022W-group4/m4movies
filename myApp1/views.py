@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 
 # load_dotenv()
 MOVIE_API_KEY = 'c3660ed96c3beaf6808809efaa5e31d7'
+movies_key = 'movies_ordered'
 
 
 def index(request):
@@ -87,7 +88,7 @@ def check_if_movie_added_for_user(request, movie_id):
     customer_settings = request.user.customer.settings
     if not customer_settings:
         return False
-    ordered = customer_settings['movies_ordered']
+    ordered = customer_settings[movies_key]
     return movie_id in ordered
 
 
@@ -359,7 +360,6 @@ def accountSettings(request):
 
 @login_required(login_url='myApp1:loginPage')
 def orderMovie(request, movie_id):
-    movies_key = 'movies_ordered'
     customer = request.user.customer
     if not customer.settings:
         customer.settings = dict()
@@ -370,3 +370,20 @@ def orderMovie(request, movie_id):
     customer.save()
     print('customer {} showed interest in movie {}'.format(customer, movie_id))
     return movieDetail(request, movie_id)
+
+
+@login_required(login_url='myApp1:loginPage')
+def fetchOrderedMovies(request):
+    customer = request.user.customer
+    ordered_movies = list()
+    if customer and customer.settings:
+        ordered_movies = customer.settings[movies_key]
+    ordered_movies_details = []
+    for movie_id in ordered_movies:
+        details = fetch_movie_detail(movie_id)
+        ordered_movies_details.append(details)
+    context = {
+        'ordered_movies': ordered_movies_details
+    }
+    print(len(ordered_movies_details), 'ordered movies by', customer)
+    return render(request, 'ordered_movies.html', context)
