@@ -17,6 +17,11 @@
                 <h1 class="text-4xl font-semibold text-center ">
                     Sign Up
                 </h1>
+                <div class="items-center text-center my-4 text-primary_red">
+                    {% for m in messages %}
+                        {{ m }}
+                    {% endfor %}
+                </div>
                 {% csrf_token %}
                 {% if form.errors %}
 

@@ -21,15 +21,18 @@
                     Log In
                 </h1>
                 {% csrf_token %}
+                <div class="items-center text-center my-4 text-primary_red">
+                    {% for m in messages %}
+                        {{ m }}
+                    {% endfor %}
+                </div>
 
-                {% if has_errors or form.errors %}
+                {% if form.errors %}
 
                     <div class=" text-center my-4 text-primary_red">
 
 
                         <p class="text-primary_red ">
-                            The form has some errors, try again with valid data.
-                            Username or password is invalid.
                             {{ form.non_field_errors }}
                         </p>
 

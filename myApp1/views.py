@@ -69,6 +69,8 @@ def signup(request):
                 messages.success(request, 'Hello ' + email + ', your account has been created successfully! 🚀')
                 Customer(user=user_saved, email=email, phone=phone, name=username).save()
                 return redirect('myApp1:loginPage')
+            else:
+                messages.error(request, 'The form has invalid data!')
 
         context = {'registerForm': registerForm}
         return render(request, 'signup.html', context)
